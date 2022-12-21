@@ -22,28 +22,38 @@ public class TransferenciaController {
 		this.transferenciaService = transferenciaService;
 	}
 
+	// Método que retorna todas as transferências
+	
 	@GetMapping("/transferencias")
 	public List<Transferencia> getAllTransferencias() {
 		return transferenciaService.findAll();
 	}
 
+	// Método que retorna transferências por período
+	
 	@GetMapping("/transferencias/periodo")
 	public List<Transferencia> getTransferenciasByPeriodo(@RequestParam("inicio") LocalDateTime inicio,
 			@RequestParam("fim") LocalDateTime fim) {
 		return transferenciaService.findByPeriodo(inicio, fim);
 	}
 
+	// Método que retorna transferência por operador
+	
 	@GetMapping("/transferencias/operador")
 	public List<Transferencia> getTransferenciasByOperador(@RequestParam("operador") String operador) {
 		return transferenciaService.findByOperador(operador);
 	}
 
+	// Método que retorna transferência por período e operador
+	
 	@GetMapping("/transferencias/periodo-operador")
 	public List<Transferencia> getTransferenciasByPeriodoOperador(@RequestParam("inicio") LocalDateTime inicio,
 			@RequestParam("fim") LocalDateTime fim, @RequestParam("operador") String operador) {
 		return transferenciaService.getTransferenciasByPeriodoOperador(inicio, fim, operador);
 	}
 
+	// Método para consulta com todos os métodos com Page para paginação
+	
 	@GetMapping("/transferencias/filtro")
 	public ResponseEntity<Page<Transferencia>> getByFilter(@RequestParam(name = "idConta", required = false) Long idConta, 
 			@RequestParam(name = "inicio", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate, 
