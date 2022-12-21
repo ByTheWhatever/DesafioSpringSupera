@@ -52,7 +52,8 @@ public class TransferenciaService {
 		return transferenciaRepository.findByPeriodoAndOperador(inicio, fim, operador);
 	}
 
-	public Page<Transferencia> findByFilter (Long idConta, LocalDateTime startDate, LocalDateTime endDate, String nomeOperador) {
+	public Page<Transferencia> findByFilter(Long idConta, LocalDateTime startDate, LocalDateTime endDate,
+			String nomeOperador) {
 		return transferenciaRepository.findByFilter(idConta, startDate, endDate, nomeOperador, PageRequest.of(0, 4));
 	}
 }
