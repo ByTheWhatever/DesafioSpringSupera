@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class BancoApplicationTests {
 
     @Test
-    void contextLoads() {
-    }
+	void contextLoads() {
+	}
 
 }
