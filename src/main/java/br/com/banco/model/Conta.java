@@ -11,6 +11,8 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+// Criação de model conta que também é utilizado na tabela de dados com atributos como colunas
+
 @Entity
 @Table(name = "conta")
 @Data

@@ -15,6 +15,8 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+// Criação de model transferência com os atributos que precisaremos e anotações para criação de tabela e colunas
+
 @Entity
 @Table(name = "transferencia")
 @Data
