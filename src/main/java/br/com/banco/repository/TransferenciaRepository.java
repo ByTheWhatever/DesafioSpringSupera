@@ -32,11 +32,8 @@ public interface TransferenciaRepository extends JpaRepository<Transferencia, Lo
 	@Query("SELECT t FROM Transferencia t WHERE t.conta.id = :contaId")
 	List<Transferencia> findByContaId(@Param("contaId") Integer contaId);
 
-	
-	// ?1 id conta 
-	// ?2 start date
-	// ?3 end date
-	// ?4 nome Operador
+	// Recupera todas as transferências sem colocar nenhum filtro
+	// Está null pois mesmo se não for informado nada vai recuperar tudo
 	@Query("SELECT t FROM Transferencia t" + " JOIN t.conta c "
 			+ "WHERE ((?1 IS NULL) or c.id = ?1) "
 			+ "AND ((?2 IS NULL and ?3 IS NULL) or t.dataTransferencia BETWEEN ?2 AND ?3) "
