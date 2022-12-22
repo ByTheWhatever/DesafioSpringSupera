@@ -15,7 +15,7 @@ import br.com.banco.model.Transferencia;
 import br.com.banco.service.TransferenciaService;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000/")
 public class TransferenciaController {
 
 	private final TransferenciaService transferenciaService;
@@ -25,43 +25,44 @@ public class TransferenciaController {
 	}
 
 	// Método que retorna todas as transferências
-	
+
 	@GetMapping("/transferencias")
 	public List<Transferencia> getAllTransferencias() {
 		return transferenciaService.findAll();
 	}
 
 	// Método que retorna transferências por período
-	
+
 	@GetMapping("/transferencias/periodo")
-	public List<Transferencia> getTransferenciasByPeriodo(@RequestParam("inicio") LocalDateTime inicio,
-			@RequestParam("fim") LocalDateTime fim) {
-		return transferenciaService.findByPeriodo(inicio, fim);
+	public List<Transferencia> getTransferenciasByPeriodo(@RequestParam("startDate") LocalDateTime startDate,
+			@RequestParam("endDate") LocalDateTime endDate) {
+		return transferenciaService.findByPeriodo(startDate, endDate);
 	}
 
 	// Método que retorna transferência por operador
-	
+
 	@GetMapping("/transferencias/operador")
-	public List<Transferencia> getTransferenciasByOperador(@RequestParam("operador") String operador) {
-		return transferenciaService.findByOperador(operador);
+	public List<Transferencia> getTransferenciasByOperador(@RequestParam("nomeOperador") String nomeOperador) {
+		return transferenciaService.findByOperador(nomeOperador);
 	}
 
 	// Método que retorna transferência por período e operador
-	
+
 	@GetMapping("/transferencias/periodo-operador")
-	public List<Transferencia> getTransferenciasByPeriodoOperador(@RequestParam("inicio") LocalDateTime inicio,
-			@RequestParam("fim") LocalDateTime fim, @RequestParam("operador") String operador) {
-		return transferenciaService.getTransferenciasByPeriodoOperador(inicio, fim, operador);
+	public List<Transferencia> getTransferenciasByPeriodoOperador(@RequestParam("startDate") LocalDateTime startDate,
+			@RequestParam("endDate") LocalDateTime endDate, @RequestParam("nomeOperador") String nomeOperador) {
+		return transferenciaService.getTransferenciasByPeriodoOperador(startDate, endDate, nomeOperador);
 	}
 
 	// Método para consulta com todos os métodos com Page para paginação
-	
+
 	@GetMapping("/transferencias/filtro")
-	public ResponseEntity<Page<Transferencia>> getByFilter(@RequestParam(name = "idConta", required = false) Long idConta, 
-			@RequestParam(name = "inicio", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate, 
-			@RequestParam(name = "fim", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate, 
-			@RequestParam(name = "operador", required = false)String nomeOperador){
+	public ResponseEntity<Page<Transferencia>> getByFilter(
+			@RequestParam(name = "idConta", required = false) Long idConta,
+			@RequestParam(name = "inicio", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+			@RequestParam(name = "fim", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
+			@RequestParam(name = "operador", required = false) String nomeOperador) {
 		return ResponseEntity.ok(transferenciaService.findByFilter(idConta, startDate, endDate, nomeOperador));
-		
+
 	}
 }
