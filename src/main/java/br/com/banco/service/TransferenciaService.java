@@ -1,7 +1,6 @@
 package br.com.banco.service;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,29 +30,8 @@ public class TransferenciaService {
 		this.transferenciaRepository = transferenciaRepository;
 	}
 
-	public List<Transferencia> findAll() {
-		return transferenciaRepository.findAll();
-	}
-
-	public List<Transferencia> findByPeriodo(LocalDateTime startDate, LocalDateTime endDate) {
-		return transferenciaRepository.findByPeriodo(startDate, endDate);
-	}
-
-	public List<Transferencia> findByOperador(String nomeOperador) {
-		return transferenciaRepository.findByOperador(nomeOperador);
-	}
-
-	public List<Transferencia> findByContaId(Integer contaId) {
-		return transferenciaRepository.findByContaId(contaId);
-	}
-
-	public List<Transferencia> getTransferenciasByPeriodoOperador(LocalDateTime inicio, LocalDateTime fim,
-			String operador) {
-		return transferenciaRepository.findByPeriodoAndOperador(inicio, fim, operador);
-	}
-
-	public Page<Transferencia> findByFilter(Long idConta, LocalDateTime startDate, LocalDateTime endDate,
-			String nomeOperador) {
-		return transferenciaRepository.findByFilter(idConta, startDate, endDate, nomeOperador, PageRequest.of(0, 4));
+	public Page<Transferencia> findByFilter(Long idConta, LocalDate startDate, LocalDate endDate,
+			String nomeOperador, Integer pagina, Integer paginaTamanho) {
+		return transferenciaRepository.findByFilter(idConta, startDate, endDate, nomeOperador, PageRequest.of(pagina, paginaTamanho));
 	}
 }

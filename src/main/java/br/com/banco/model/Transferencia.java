@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 // Criação de model transferência com os atributos que precisaremos e anotações para criação de tabela e colunas
@@ -32,6 +34,7 @@ public class Transferencia implements Serializable {
 	private LocalDateTime dataTransferencia;
 
 	@Column(name = "valor")
+	@JsonFormat(shape = JsonFormat.Shape.STRING)
 	private BigDecimal valor;
 
 	@Column(name = "tipo")
