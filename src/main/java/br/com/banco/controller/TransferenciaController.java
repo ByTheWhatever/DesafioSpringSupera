@@ -14,7 +14,8 @@ import br.com.banco.model.Transferencia;
 import br.com.banco.service.TransferenciaService;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*") // Optei por deixar como acesso de qualquer porta ao invés de deixar apenas 3000
+							// por motivo de não saber em qual porta o usuário rodará o front
 public class TransferenciaController {
 
 	private final TransferenciaService transferenciaService;
@@ -29,9 +30,10 @@ public class TransferenciaController {
 			@RequestParam(name = "inicio", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
 			@RequestParam(name = "fim", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
 			@RequestParam(name = "operador", required = false) String nomeOperador,
-			@RequestParam(name = "page", required = false,defaultValue = "0") Integer pagina,
-			@RequestParam(name = "pageSize", required = false,defaultValue = "4") Integer paginaTamanho) {
-		return ResponseEntity.ok(transferenciaService.findByFilter(idConta, startDate, endDate, nomeOperador, pagina, paginaTamanho));
-
+			@RequestParam(name = "page", required = false, defaultValue = "0") Integer pagina,
+			@RequestParam(name = "pageSize", required = false, defaultValue = "4") Integer paginaTamanho) {
+		return ResponseEntity.ok(
+				transferenciaService.findByFilter(idConta, startDate, endDate, nomeOperador, pagina, paginaTamanho));
 	}
+
 }

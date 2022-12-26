@@ -30,8 +30,10 @@ public class TransferenciaService {
 		this.transferenciaRepository = transferenciaRepository;
 	}
 
-	public Page<Transferencia> findByFilter(Long idConta, LocalDate startDate, LocalDate endDate,
-			String nomeOperador, Integer pagina, Integer paginaTamanho) {
-		return transferenciaRepository.findByFilter(idConta, startDate, endDate, nomeOperador, PageRequest.of(pagina, paginaTamanho));
+	public Page<Transferencia> findByFilter(Long idConta, LocalDate startDate, LocalDate endDate, String nomeOperador,
+			Integer pagina, Integer paginaTamanho) {
+		return transferenciaRepository.findByFilter(idConta, startDate, endDate, nomeOperador,
+				PageRequest.of(pagina, paginaTamanho));
 	}
+
 }
